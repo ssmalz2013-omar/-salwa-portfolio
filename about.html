@@ -1,0 +1,23 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>نبذة عني | ملف الإنجاز الإلكتروني</title><link rel="stylesheet" href="styles.css"></head><body>
+<header class="topbar"><a class="brand" href="index.html"><span>✦</span> ملف الإنجاز الإلكتروني</a><button class="menu" id="menuBtn">☰</button><nav id="nav"><a href="index.html">الرئيسية</a><a href="about.html">نبذة عني</a><a href="vision.html">الرؤية والرسالة</a><a href="policy.html">سياسة التعليم</a><a href="performance.html">الأداء الوظيفي</a><a href="years.html">أرشيف السنوات</a></nav></header>
+<main class="inner-page"><section class="page-hero"><span>ملفي المهني</span><h1>نبذة عني</h1></section>
+<section class="page-content"><article class="content-card"><h2>نبذة مهنية</h2><p>معلمة فيزياء بالمرحلة الثانوية، أؤمن بأن تعلم الفيزياء يصبح أكثر أثرًا عندما يرتبط بالتجربة والاستقصاء والمواقف الحياتية. أحرص على تنويع استراتيجيات التدريس، مراعاة الفروق الفردية، توظيف التقنية، وقياس أثر التعلم.</p></article>
+<article class="content-card"><div class="evidence-title-row"><div><span class="eyebrow-small">شواهد القسم</span><h2>المرفقات والشواهد</h2></div></div><div id="sectionAttachments" class="criterion-attachments"></div></article>
+</section><div class="page-back"><a href="index.html">← العودة إلى الرئيسية</a></div></main>
+<footer><span>❧</span><p>التعليم ليس فقط نقل معرفة… بل هو صناعة أثر يبقى مدى الحياة</p><span>❧</span></footer>
+<script src="data.js?v=20261002-2"></script><script>
+(function(){
+  try{
+    const q=new URLSearchParams(location.search);
+    if(q.get('preview')==='1'){
+      const raw=sessionStorage.getItem('PORTFOLIO_PREVIEW_DATA');
+      if(raw) window.PORTFOLIO_DATA=JSON.parse(raw);
+      document.documentElement.classList.add('preview-mode');
+    }
+  }catch(e){}
+})();
+</script><script>
+const card=(window.PORTFOLIO_DATA?.homeCards||[]).find(x=>x.id==="about");const box=document.getElementById('sectionAttachments');const atts=Array.isArray(card?.attachments)?card.attachments:[];
+if(!atts.length){box.innerHTML='<div class="empty-criterion-evidence">لا توجد شواهد مضافة لهذا القسم حتى الآن.</div>';}else{atts.forEach((a,i)=>{const el=document.createElement('a');el.className='attachment-card';if(a.data){el.href=a.data;el.download=a.fileName||a.label||'مرفق';}else{el.href=a.url||'#';el.target='_blank';el.rel='noopener';}el.innerHTML='<span class="attachment-icon">📎</span><div><strong></strong><small>فتح المرفق</small></div>';el.querySelector('strong').textContent=a.label||('مرفق '+(i+1));box.appendChild(el);});}
+const m=document.getElementById('menuBtn'),n=document.getElementById('nav');if(m&&n)m.onclick=()=>n.classList.toggle('open');
+</script></body></html>

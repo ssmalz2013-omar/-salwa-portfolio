@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>إدارة ملف الإنجاز</title>
+<style>
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&family=Noto+Kufi+Arabic:wght@400;600;700&family=Tajawal:wght@400;600;700&display=swap");
+:root{--bg:#fff9f7;--card:#fff;--line:#eadad6;--text:#4c3945;--muted:#8d7a83;--rose:#cfa3a3;--mauve:#775766}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:Tajawal,Tahoma,sans-serif}
+.wrap{max-width:1050px;margin:auto;padding:24px}
+h1{margin:0 0 8px} .lead{color:var(--muted);margin:0 0 22px}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.tabs button,.btn{border:0;border-radius:999px;padding:9px 14px;font:inherit;cursor:pointer}
+.tabs button{background:#f1e5e2;color:var(--mauve)} .tabs button.active,.btn.primary{background:var(--mauve);color:#fff}
+.btn.soft{background:#f1e5e2;color:var(--mauve)} .btn.danger{background:#f7e6e4;color:#8b5157}
+.panel{display:none}.panel.active{display:block}
+.box{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;margin-bottom:14px}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+label{display:block;font-size:12px;color:var(--muted);margin-bottom:4px}
+input,textarea,select{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 11px;font:inherit;background:#fff}
+textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
+.row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
+.item{border:1px solid var(--line);border-radius:13px;padding:14px;margin:10px 0;background:#fff}
+.item-head{display:flex;justify-content:space-between;gap:10px;align-items:center}
+.item h3{margin:0;font-size:17px}
+.mini{font-size:11px;color:var(--muted)}
+.attachments{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.att-row{display:grid;grid-template-columns:1fr 2fr auto;gap:7px;margin-top:7px}
+.export{position:sticky;bottom:24px;z-index:50;background:rgba(255,249,247,.97);backdrop-filter:blur(10px);padding:12px;border:1px solid var(--line);border-radius:16px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:0 8px 28px rgba(77,57,69,.12)}
+.note{font-size:12px;color:var(--muted);background:#fff4ef;border:1px dashed var(--rose);border-radius:12px;padding:12px}
+@media(max-width:700px){.grid{grid-template-columns:1fr}.full{grid-column:auto}.att-row{grid-template-columns:1fr}.wrap{padding:16px 16px 240px}.export{position:static;margin:18px 0 28px;display:grid;grid-template-columns:1fr;gap:10px}.export .btn{width:100%;padding:12px 14px}.note{line-height:1.8}}
+.editor-focus{outline:3px solid rgba(207,163,163,.35);box-shadow:0 0 0 7px rgba(207,163,163,.12)}
+</style>
+</head>
+<body>
+<div style="max-width:1100px;margin:16px auto;padding:12px 16px;border:1px solid #d7c3c3;border-radius:14px;background:#fff8f8;color:#5d4652;font-family:inherit;direction:rtl">هذه صفحة الإدارة الخاصة. التعديلات هنا لا تغيّر الموقع المنشور مباشرة؛ بعد الانتهاء استخدمي زر تنزيل <b>data.js</b> ثم أعيدي رفع النسخة على Netlify.</div>
+<div class="wrap">
+<h1>إدارة ملف الإنجاز</h1>
+<p class="lead">عدّلي ما تريدين، ثم اضغطي <b>معاينة التعديلات</b> أولًا. المعاينة لا تحفظ شيئًا. إذا أعجبك الشكل اضغطي <b>حفظ التعديلات</b>.</p>
+
+<div class="tabs">
+  <button data-tab="settings" class="active">الإعدادات والخط</button>
+  <button data-tab="cards">بطاقات الرئيسية</button>
+  <button data-tab="criteria">بنود الأداء</button>
+  <button data-tab="years">السنوات</button>
+</div>
+
+<section id="settings" class="panel active">
+  <div class="box grid">
+    <div><label>عنوان الموقع</label><input id="siteTitle"></div>
+    <div><label>اسم المعلمة</label><input id="teacherName"></div>
+    <div><label>التخصص</label><input id="specialty"></div>
+    <div><label>العبارة الرئيسية</label><input id="tagline"></div>
+    <div><label>الخط</label>
+      <select id="font">
+        <option>Tajawal</option><option>Cairo</option><option>Noto Kufi Arabic</option>
+        <option>Tahoma</option><option>Arial</option><option>Georgia</option>
+      </select>
+    </div>
+    <div><label>حجم العنوان الرئيسي (بكسل)</label><input id="heroTitleSize" type="number" min="24" max="80" step="1"></div>
+    <div><label>حجم عناوين الأقسام والصفحات (بكسل)</label><input id="sectionTitleSize" type="number" min="18" max="52" step="1"></div>
+    <div><label>حجم النص العادي (بكسل)</label><input id="bodyTextSize" type="number" min="11" max="28" step="1"></div>
+    <div><label>حجم عناوين البطاقات (بكسل)</label><input id="cardTitleSize" type="number" min="14" max="34" step="1"></div>
+    <div><label>حجم وصف البطاقات (بكسل)</label><input id="cardDescriptionSize" type="number" min="10" max="24" step="1"></div>
+    <div><label>اللون الوردي</label><input id="accent" type="color"></div>
+    <div><label>اللون الغامق</label><input id="dark" type="color"></div>
+  </div>
+<div class="note">غيّري الأرقام ثم اضغطي <b>معاينة التعديلات</b> قبل الحفظ. المقاس بالبكسل، ويمكنك الرجوع للقيم السابقة متى أردتِ.</div>
+</section>
+
+<section id="cards" class="panel">
+  <div id="cardsList"></div>
+  <button class="btn soft" id="addCard">＋ إضافة بطاقة</button>
+</section>
+
+<section id="criteria" class="panel">
+  <div id="criteriaList"></div>
+  <button class="btn soft" id="addCriterion">＋ إضافة بند جديد</button>
+</section>
+
+<section id="years" class="panel">
+  <div id="yearsList"></div>
+  <button class="btn soft" id="addYear">＋ إضافة سنة</button>
+</section>
+
+<div class="note">كل بند أداء له صفحته الخاصة، والشواهد تظهر تحته مباشرة. أضيفي اسم الشاهد ورابط Google Drive فقط؛ لا يوجد رفع ملفات داخل الموقع.</div>
+
+<div class="export">
+  <button class="btn soft" id="preview">👁 معاينة التعديلات</button>
+    <button class="btn primary" id="downloadData">✓ حفظ التعديلات (تنزيل data.js)</button>
+    <button class="btn danger" id="cancelChanges">إلغاء التعديلات</button>
+</div>
+</div>
+
+<script src="data.js?v=20261002-2"></script>
+<script>
+let data=JSON.parse(JSON.stringify(window.PORTFOLIO_DATA||{}));
+const $=id=>document.getElementById(id);
+function esc(s){return String(s??"").replace(/"/g,"&quot;")}
+
+document.querySelectorAll("[data-tab]").forEach(b=>b.onclick=()=>{
+ document.querySelectorAll("[data-tab]").forEach(x=>x.classList.remove("active"));
+ document.querySelectorAll(".panel").forEach(x=>x.classList.remove("active"));
+ b.classList.add("active"); $(b.dataset.tab).classList.add("active");
+});
+
+function fillSettings(){
+ const s=data.settings||{};
+ ["siteTitle","teacherName","specialty","tagline","font","accent","dark"].forEach(k=>$(k).value=s[k]||"");
+ const defaults={heroTitleSize:54,sectionTitleSize:30,bodyTextSize:15,cardTitleSize:19,cardDescriptionSize:12};
+ Object.keys(defaults).forEach(k=>$(k).value=(s[k]??defaults[k]));
+}
+function readSettings(){
+ data.settings=data.settings||{};
+ ["siteTitle","teacherName","specialty","tagline","font","accent","dark"].forEach(k=>data.settings[k]=$(k).value);
+ ["heroTitleSize","sectionTitleSize","bodyTextSize","cardTitleSize","cardDescriptionSize"].forEach(k=>data.settings[k]=Number($(k).value)||undefined);
+}
+
+function renderCards(){
+ const box=$("cardsList");box.innerHTML="";
+ (data.homeCards||[]).forEach((c,i)=>{
+  const el=document.createElement("div");el.className="item";el.dataset.itemId=c.id||"";
+  el.innerHTML=`<div class="item-head"><h3>بطاقة ${i+1}</h3><button class="btn danger delete-card">حذف</button></div>
+   <div class="grid">
+   <div><label>العنوان</label><input data-k="title" value="${esc(c.title)}"></div>
+   <div><label>الصورة</label><input data-k="image" value="${esc(c.image)}"></div>
+   <div class="full"><label>الوصف</label><textarea data-k="description">${c.description||""}</textarea></div>
+   <div><label>الرابط الداخلي</label><input data-k="target" value="${esc(c.target)}"></div>
+   <div><label>إظهار البطاقة</label><select data-k="visible"><option value="true">نعم</option><option value="false">لا</option></select></div>
+   </div>
+   <div class="attachments"><b>شواهد هذا القسم</b><div class="att-list"></div><button class="btn soft add-att">＋ إضافة رابط شاهد</button></div>`;
+  el.querySelector('[data-k="visible"]').value=String(c.visible!==false);
+  el.querySelectorAll("[data-k]").forEach(inp=>inp.oninput=()=>{const k=inp.dataset.k;c[k]=k==="visible"?inp.value==="true":inp.value});
+  c.attachments=Array.isArray(c.attachments)?c.attachments:[];
+  const attList=el.querySelector(".att-list");
+  function drawAtt(){attList.innerHTML="";c.attachments.forEach((a,j)=>{const r=document.createElement("div");r.className="att-row";r.innerHTML=`<input class="att-label" placeholder="اسم الشاهد" value="${esc(a.label)}"><input class="att-url" placeholder="رابط الشاهد (Google Drive)" value="${esc(a.url)}"><button class="btn danger">حذف</button>`;const label=r.querySelector(".att-label"),url=r.querySelector(".att-url");label.oninput=()=>a.label=label.value;url.oninput=()=>{a.url=url.value;delete a.data;delete a.fileName;delete a.mime};r.querySelector("button").onclick=()=>{c.attachments.splice(j,1);drawAtt()};attList.appendChild(r);});}
+  drawAtt(); el.querySelector(".add-att").onclick=()=>{c.attachments.push({label:"",url:""});drawAtt()};
+  el.querySelector(".delete-card").onclick=()=>{data.homeCards.splice(i,1);renderCards()};
+  box.appendChild(el);
+ });
+}
+function renderCriteria(){
+ const box=$("criteriaList");box.innerHTML="";
+ (data.criteria||[]).forEach((c,i)=>{
+  const el=document.createElement("div");el.className="item";el.dataset.itemId=c.id||"";
+  el.innerHTML=`<div class="item-head"><h3>${c.title||("بند "+(i+1))}</h3><button class="btn danger">حذف</button></div>
+   <div class="grid">
+   <div><label>العنوان</label><input data-k="title" value="${esc(c.title)}"></div>
+   <div><label>إظهار البند</label><select data-k="visible"><option value="true">نعم</option><option value="false">لا</option></select></div>
+   <div class="full"><label>الوصف</label><textarea data-k="description">${c.description||""}</textarea></div>
+   </div>
+   <div class="attachments"><b>الشواهد والروابط</b><div class="att-list"></div><button class="btn soft add-att">＋ إضافة رابط شاهد</button></div>`;
+  el.querySelector('[data-k="visible"]').value=String(c.visible!==false);
+  el.querySelectorAll("[data-k]").forEach(inp=>inp.oninput=()=>{const k=inp.dataset.k;c[k]=k==="visible"?inp.value==="true":inp.value});
+  c.attachments=Array.isArray(c.attachments)?c.attachments:[];
+  const attList=el.querySelector(".att-list");
+  function drawAtt(){
+    attList.innerHTML="";
+    c.attachments.forEach((a,j)=>{
+      const r=document.createElement("div");r.className="att-row";
+      r.innerHTML=`<input class="att-label" placeholder="اسم الشاهد" value="${esc(a.label)}"><input class="att-url" placeholder="رابط الشاهد (Google Drive)" value="${esc(a.url)}"><button class="btn danger">حذف</button>`;
+      const label=r.querySelector(".att-label"),url=r.querySelector(".att-url");label.oninput=()=>a.label=label.value;url.oninput=()=>{a.url=url.value;delete a.data;delete a.fileName;delete a.mime};
+      r.querySelector("button").onclick=()=>{c.attachments.splice(j,1);drawAtt()};
+      attList.appendChild(r);
+    });
+  }
+  drawAtt();
+  el.querySelector(".add-att").onclick=()=>{c.attachments.push({label:"",url:""});drawAtt()};
+  el.querySelector(".danger").onclick=()=>{data.criteria.splice(i,1);renderCriteria()};
+  box.appendChild(el);
+ });
+}
+function renderYears(){
+ const box=$("yearsList");box.innerHTML="";
+ (data.years||[]).forEach((y,i)=>{
+  const el=document.createElement("div");el.className="item";
+  el.innerHTML=`<div class="item-head"><h3>سنة ${i+1}</h3><button class="btn danger">حذف</button></div>
+   <div class="grid"><div><label>اسم السنة</label><input data-k="label" value="${esc(y.label)}"></div>
+   <div class="full"><label>الوصف</label><textarea data-k="description">${y.description||""}</textarea></div></div>`;
+  el.querySelectorAll("[data-k]").forEach(inp=>inp.oninput=()=>y[inp.dataset.k]=inp.value);
+  el.querySelector(".danger").onclick=()=>{data.years.splice(i,1);renderYears()};
+  box.appendChild(el);
+ });
+}
+$("addCard").onclick=()=>{data.homeCards=data.homeCards||[];data.homeCards.push({id:"card-"+Date.now(),title:"قسم جديد",description:"",image:"",target:"#",visible:true,attachments:[]});renderCards()};
+$("addCriterion").onclick=()=>{data.criteria=data.criteria||[];data.criteria.push({id:"item-"+Date.now(),title:"بند جديد",description:"",visible:true,attachments:[]});renderCriteria()};
+$("addYear").onclick=()=>{data.years=data.years||[];data.years.push({label:"عام جديد",description:""});renderYears()};
+
+function download(name,content,type="text/javascript;charset=utf-8"){
+ const blob=new Blob([content],{type});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+}
+$("downloadData").onclick=()=>{
+ readSettings();
+ download("data.js","window.PORTFOLIO_DATA = "+JSON.stringify(data,null,2)+";\\n");
+};
+function syncVisibleFields(){
+  readSettings();
+  // قيم البطاقات والبنود والسنوات تتحدث مباشرة أثناء الكتابة؛ هذه الدالة فقط تضمن الإعدادات العامة.
+}
+$("preview").onclick=()=>{
+  syncVisibleFields();
+  try{sessionStorage.setItem("PORTFOLIO_PREVIEW_DATA",JSON.stringify(data));}catch(e){}
+  window.open("index.html?preview=1","_blank");
+};
+$("cancelChanges").onclick=()=>{
+  if(confirm("هل تريدين إلغاء التعديلات غير المحفوظة والعودة لآخر نسخة؟")){
+    try{sessionStorage.removeItem("PORTFOLIO_PREVIEW_DATA");}catch(e){}
+    location.reload();
+  }
+};
+
+fillSettings();renderCards();renderCriteria();renderYears();
+
+// فتح القسم الصحيح تلقائيًا عند القدوم من زر + داخل الموقع
+const qs=new URLSearchParams(location.search);
+const wantedTab=qs.get("tab");
+if(wantedTab){
+ const btn=document.querySelector(`[data-tab="${wantedTab}"]`);
+ if(btn) btn.click();
+}
+setTimeout(()=>{
+ const wanted=qs.get("card")||qs.get("criterion");
+ if(!wanted)return;
+ const el=document.querySelector(`[data-item-id="${CSS.escape(wanted)}"]`);
+ if(el){el.classList.add("editor-focus");el.scrollIntoView({behavior:"smooth",block:"center"});
+   const add=el.querySelector(".add-att"); if(add){add.click(); setTimeout(()=>el.querySelector(".att-list .att-row:last-child input")?.focus(),150);}
+ }
+},120);
+</script>
+</body>
+</html>

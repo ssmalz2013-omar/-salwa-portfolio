@@ -1,0 +1,45 @@
+<!doctype html><html lang="ar" dir="rtl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>بنود الأداء الوظيفي | ملف الإنجاز الإلكتروني</title><link rel="stylesheet" href="styles.css"></head><body><header class="topbar"><a class="brand" href="index.html"><span>✦</span> ملف الإنجاز الإلكتروني</a><button class="menu" id="menuBtn">☰</button><nav id="nav"><a href="index.html">الرئيسية</a><a href="about.html">نبذة عني</a><a href="vision.html">الرؤية والرسالة</a><a href="policy.html">سياسة التعليم</a><a href="performance.html">الأداء الوظيفي</a><a href="years.html">أرشيف السنوات</a></nav></header><main class="inner-page"><section class="page-hero"><span>الأداء الوظيفي</span><h1>بنود الأداء الوظيفي</h1></section><section class="criteria" id="criteria"></section><div class="page-back"><a href="index.html">← العودة إلى الرئيسية</a></div></main><footer><span>❧</span><p>التعليم ليس فقط نقل معرفة… بل هو صناعة أثر يبقى مدى الحياة</p><span>❧</span></footer><script src="data.js?v=20261002-2"></script><script>
+(function(){
+  try{
+    const q=new URLSearchParams(location.search);
+    if(q.get('preview')==='1'){
+      const raw=sessionStorage.getItem('PORTFOLIO_PREVIEW_DATA');
+      if(raw) window.PORTFOLIO_DATA=JSON.parse(raw);
+      document.documentElement.classList.add('preview-mode');
+    }
+  }catch(e){}
+})();
+</script><script>
+const fallbackCriteria = [
+  {id:"duties",title:"أداء الواجبات الوظيفية",description:"الالتزام بالمسؤوليات والمهام المهنية بكفاءة وانتظام.",visible:true},
+  {id:"community",title:"التفاعل مع المجتمع المحلي",description:"مشاركة فاعلة في المبادرات والأنشطة ذات الصلة بالمجتمع.",visible:true},
+  {id:"parents",title:"التعامل مع أولياء الأمور",description:"تواصل مهني داعم لبناء شراكة فعالة مع أولياء الأمور.",visible:true},
+  {id:"strategies",title:"التنويع في استراتيجيات التدريس",description:"تنويع طرائق واستراتيجيات التعليم وفق احتياجات الطالبات.",visible:true},
+  {id:"results",title:"تحسين نتائج المتعلمين",description:"توظيف خطط علاجية وإثرائية لتحسين التحصيل.",visible:true},
+  {id:"plan",title:"إعداد وتنفيذ خطة التعلم",description:"تخطيط منظم للتعلم يربط الأهداف بالأنشطة والتقويم.",visible:true},
+  {id:"technology",title:"توظيف تقنيات ووسائل التعلم المناسبة",description:"استخدام التقنية والوسائل التعليمية لدعم التعلم.",visible:true},
+  {id:"environment",title:"تهيئة البيئة التعليمية",description:"تهيئة بيئة صفية منظمة ومحفزة وآمنة.",visible:true},
+  {id:"management",title:"الإدارة الصفية",description:"إدارة فعالة للحصة والوقت والتفاعل الصفي.",visible:true},
+  {id:"analysis",title:"تحليل نتائج المتعلمين وتشخيص مستوياتهم",description:"تحليل النتائج لتحديد نقاط القوة والاحتياج.",visible:true},
+  {id:"assessment",title:"تنوع أساليب التقويم",description:"استخدام أدوات تقويم متنوعة قبل التعلم وأثناءه وبعده.",visible:true}
+];
+const p=window.PORTFOLIO_DATA||{};
+const list=Array.isArray(p.criteria)&&p.criteria.length?p.criteria:fallbackCriteria;
+const b=document.getElementById('criteria'),icons=["✓","⌂","☏","✧","↗","▤","⌁","◫","◉","▥","◇"];
+list.filter(x=>x.visible!==false).forEach((x,i)=>{
+  const a=document.createElement('article');
+  a.className='criterion clickable';
+  a.tabIndex=0;
+  a.setAttribute('role','link');
+  a.innerHTML=`<div class="cicon">${icons[i%icons.length]}</div><h3></h3><p></p><div class="criterion-open">فتح البند ←</div>`;
+  a.querySelector('h3').textContent=x.title||'';
+  a.querySelector('p').textContent=x.description||'';
+  const go=()=>location.href=`criterion.html?id=${encodeURIComponent(x.id||i)}`;
+  a.onclick=go;
+  a.onkeydown=e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();go();}};
+  b.appendChild(a);
+});
+if(!b.children.length){b.innerHTML='<div class="empty-criterion-evidence">تعذر تحميل البنود. أعيدي تحديث الصفحة.</div>';}
+const menuBtn=document.getElementById('menuBtn'),nav=document.getElementById('nav');
+if(menuBtn&&nav) menuBtn.onclick=()=>nav.classList.toggle('open');
+</script></body></html>
