@@ -35,10 +35,24 @@ textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
 </style>
 </head>
 <body>
-<div style="max-width:1100px;margin:16px auto;padding:12px 16px;border:1px solid #d7c3c3;border-radius:14px;background:#fff8f8;color:#5d4652;font-family:inherit;direction:rtl">هذه صفحة الإدارة الخاصة. التعديلات هنا لا تغيّر الموقع المنشور مباشرة؛ بعد الانتهاء استخدمي زر تنزيل <b>data.js</b> ثم أعيدي رفع النسخة على Netlify.</div>
+<div style="max-width:1100px;margin:16px auto;padding:12px 16px;border:1px solid #d7c3c3;border-radius:14px;background:#fff8f8;color:#5d4652;font-family:inherit;direction:rtl">هذه صفحة الإدارة الخاصة. بعد ربطها برمز GitHub الخاص بك، يمكنك الحفظ والنشر مباشرة بدون تنزيل <b>data.js</b> وبدون رفع ZIP.</div>
 <div class="wrap">
 <h1>إدارة ملف الإنجاز</h1>
 <p class="lead">عدّلي ما تريدين، ثم اضغطي <b>معاينة التعديلات</b> أولًا. المعاينة لا تحفظ شيئًا. إذا أعجبك الشكل اضغطي <b>حفظ التعديلات</b>.</p>
+<div class="box" id="githubBox">
+  <h3 style="margin-top:0">الحفظ المباشر عبر GitHub</h3>
+  <p class="mini" style="font-size:13px;line-height:1.8">أدخلي رمز GitHub الخاص بك مرة واحدة. الرمز لا يُكتب داخل ملفات الموقع، ويُستخدم فقط لإرسال التعديلات إلى مستودعك.</p>
+  <div class="grid">
+    <div class="full"><label>رمز GitHub (Fine-grained token)</label><input id="githubToken" type="password" autocomplete="off" placeholder="github_pat_..."></div>
+    <div><label>المستودع</label><input id="githubRepo" value="ssmalz2013-omar/-salwa-portfolio" dir="ltr"></div>
+    <div><label>الفرع</label><input id="githubBranch" value="main" dir="ltr"></div>
+  </div>
+  <div class="row" style="align-items:center">
+    <label style="display:flex;gap:8px;align-items:center;margin:0"><input id="rememberToken" type="checkbox" style="width:auto"> تذكّر الرمز على هذا الجهاز</label>
+    <button class="btn soft" id="testGithub">اختبار الاتصال</button>
+    <span id="githubStatus" class="mini"></span>
+  </div>
+</div>
 
 <div class="tabs">
   <button data-tab="settings" class="active">الإعدادات والخط</button>
@@ -89,7 +103,7 @@ textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
 
 <div class="export">
   <button class="btn soft" id="preview">👁 معاينة التعديلات</button>
-    <button class="btn primary" id="downloadData">✓ حفظ التعديلات (تنزيل data.js)</button>
+    <button class="btn primary" id="downloadData">✓ حفظ ونشر التعديلات مباشرة</button>
     <button class="btn danger" id="cancelChanges">إلغاء التعديلات</button>
 </div>
 </div>
@@ -188,12 +202,61 @@ $("addCard").onclick=()=>{data.homeCards=data.homeCards||[];data.homeCards.push(
 $("addCriterion").onclick=()=>{data.criteria=data.criteria||[];data.criteria.push({id:"item-"+Date.now(),title:"بند جديد",description:"",visible:true,attachments:[]});renderCriteria()};
 $("addYear").onclick=()=>{data.years=data.years||[];data.years.push({label:"عام جديد",description:""});renderYears()};
 
-function download(name,content,type="text/javascript;charset=utf-8"){
- const blob=new Blob([content],{type});const a=document.createElement("a");a.href=URL.createObjectURL(blob);a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(a.href),500);
+function utf8ToBase64(str){
+  const bytes=new TextEncoder().encode(str); let binary=""; const chunk=0x8000;
+  for(let i=0;i<bytes.length;i+=chunk) binary+=String.fromCharCode(...bytes.subarray(i,i+chunk));
+  return btoa(binary);
 }
-$("downloadData").onclick=()=>{
- readSettings();
- download("data.js","window.PORTFOLIO_DATA = "+JSON.stringify(data,null,2)+";\\n");
+function getGithubSettings(){
+  return {token:$("githubToken").value.trim(),repo:$("githubRepo").value.trim(),branch:$("githubBranch").value.trim()||"main"};
+}
+function setGithubStatus(msg,ok=false){
+  const el=$("githubStatus"); el.textContent=msg; el.style.color=ok?"#39705a":"#8b5157";
+}
+async function githubRequest(path,options={}){
+  const {token}=getGithubSettings();
+  if(!token) throw new Error("أدخلي رمز GitHub أولًا");
+  const headers={"Accept":"application/vnd.github+json","Authorization":"Bearer "+token,"X-GitHub-Api-Version":"2022-11-28",...(options.headers||{})};
+  const res=await fetch("https://api.github.com"+path,{...options,headers});
+  const text=await res.text(); let body={};
+  try{body=text?JSON.parse(text):{}}catch(e){body={message:text}}
+  if(!res.ok) throw new Error(body.message||("GitHub error "+res.status));
+  return body;
+}
+async function testGithub(){
+  const {repo,branch}=getGithubSettings();
+  if(!repo.includes("/")) throw new Error("اسم المستودع غير صحيح");
+  return githubRequest(`/repos/${repo}/contents/data.js?ref=${encodeURIComponent(branch)}`);
+}
+$("testGithub").onclick=async()=>{
+  try{setGithubStatus("جاري الاختبار...");await testGithub();setGithubStatus("✓ الاتصال ناجح",true);}
+  catch(e){setGithubStatus("تعذر الاتصال: "+e.message);}
+};
+$("rememberToken").onchange=()=>{
+  const t=$("githubToken").value.trim();
+  if($("rememberToken").checked && t) localStorage.setItem("PORTFOLIO_GITHUB_TOKEN",t);
+  else localStorage.removeItem("PORTFOLIO_GITHUB_TOKEN");
+};
+$("githubToken").oninput=()=>{
+  const t=$("githubToken").value.trim();
+  if($("rememberToken").checked) localStorage.setItem("PORTFOLIO_GITHUB_TOKEN",t);
+  else sessionStorage.setItem("PORTFOLIO_GITHUB_TOKEN",t);
+};
+$("downloadData").onclick=async()=>{
+  readSettings();
+  const btn=$("downloadData"),oldText=btn.textContent;
+  try{
+    btn.disabled=true;btn.textContent="جاري الحفظ والنشر...";setGithubStatus("جاري الحفظ...");
+    const {repo,branch}=getGithubSettings();
+    if(!repo.includes("/")) throw new Error("اسم المستودع غير صحيح");
+    const current=await githubRequest(`/repos/${repo}/contents/data.js?ref=${encodeURIComponent(branch)}`);
+    const content="window.PORTFOLIO_DATA = "+JSON.stringify(data,null,2)+";\n";
+    await githubRequest(`/repos/${repo}/contents/data.js`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:"تحديث ملف الإنجاز من صفحة الإدارة",content:utf8ToBase64(content),sha:current.sha,branch})});
+    try{sessionStorage.removeItem("PORTFOLIO_PREVIEW_DATA");}catch(e){}
+    setGithubStatus("✓ تم الحفظ في GitHub. Netlify سيحدّث الموقع تلقائيًا خلال لحظات.",true);
+    alert("تم حفظ التعديلات بنجاح. سيتم تحديث الموقع تلقائيًا خلال لحظات.");
+  }catch(e){setGithubStatus("تعذر الحفظ: "+e.message);alert("تعذر الحفظ: "+e.message);}
+  finally{btn.disabled=false;btn.textContent=oldText;}
 };
 function syncVisibleFields(){
   readSettings();
@@ -211,6 +274,7 @@ $("cancelChanges").onclick=()=>{
   }
 };
 
+try{const saved=localStorage.getItem("PORTFOLIO_GITHUB_TOKEN");const session=sessionStorage.getItem("PORTFOLIO_GITHUB_TOKEN");if(saved){$("githubToken").value=saved;$("rememberToken").checked=true;}else if(session){$("githubToken").value=session;}}catch(e){}
 fillSettings();renderCards();renderCriteria();renderYears();
 
 // فتح القسم الصحيح تلقائيًا عند القدوم من زر + داخل الموقع
