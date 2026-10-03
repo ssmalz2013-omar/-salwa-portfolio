@@ -253,8 +253,8 @@ $("downloadData").onclick=async()=>{
     const content="window.PORTFOLIO_DATA = "+JSON.stringify(data,null,2)+";\n";
     await githubRequest(`/repos/${repo}/contents/data.js`,{method:"PUT",headers:{"Content-Type":"application/json"},body:JSON.stringify({message:"تحديث ملف الإنجاز من صفحة الإدارة",content:utf8ToBase64(content),sha:current.sha,branch})});
     try{sessionStorage.removeItem("PORTFOLIO_PREVIEW_DATA");}catch(e){}
-    setGithubStatus("✓ تم الحفظ في GitHub. Netlify سيحدّث الموقع تلقائيًا خلال لحظات.",true);
-    alert("تم حفظ التعديلات بنجاح. سيتم تحديث الموقع تلقائيًا خلال لحظات.");
+    setGithubStatus("✓ تم الحفظ في GitHub. GitHub Pages سيحدّث الموقع تلقائيًا خلال لحظات.",true);
+    alert("تم حفظ التعديلات بنجاح في GitHub. سيظهر التحديث على الموقع خلال لحظات.");
   }catch(e){setGithubStatus("تعذر الحفظ: "+e.message);alert("تعذر الحفظ: "+e.message);}
   finally{btn.disabled=false;btn.textContent=oldText;}
 };
