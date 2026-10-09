@@ -1,6 +1,6 @@
 window.PORTFOLIO_DATA = {
   "settings": {
-    "siteTitle": "ملف إنجاز",
+    "siteTitle": "السلام عليكم",
     "teacherName": "المعلمة / سلوى الزهراني",
     "specialty": "تخصص الفيزياء",
     "tagline": "أثرٌ يبقى… وتعلُّمٌ يستمر",
@@ -9,9 +9,9 @@ window.PORTFOLIO_DATA = {
     "dark": "#775766",
     "heroTitleSize": 64,
     "sectionTitleSize": 30,
-    "bodyTextSize": 16,
-    "cardTitleSize": 22,
-    "cardDescriptionSize": 14
+    "bodyTextSize": 15,
+    "cardTitleSize": 19,
+    "cardDescriptionSize": 12
   },
   "homeCards": [
     {
