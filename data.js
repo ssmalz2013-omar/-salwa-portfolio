@@ -21,16 +21,7 @@ window.PORTFOLIO_DATA = {
       "image": "assets/about.jpg",
       "target": "about.html",
       "visible": true,
-      "attachments": [
-        {
-          "label": "",
-          "url": "https://drive.google.com/drive/folders/1FsTaMbk0lZmF_1s91rrTTTvUYWtLtg6p"
-        },
-        {
-          "label": "",
-          "url": ""
-        }
-      ]
+      "attachments": []
     },
     {
       "id": "vision",
@@ -58,6 +49,34 @@ window.PORTFOLIO_DATA = {
       "target": "performance.html",
       "visible": true,
       "attachments": []
+    },
+    {
+      "id": "card-1791662783753",
+      "title": "ملف انجاز الصف الثالث",
+      "description": "",
+      "image": "",
+      "target": "#",
+      "visible": true,
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://padlet.com/ssmalz2013/3-nu4quddaji9rhbiv"
+        }
+      ]
+    },
+    {
+      "id": "card-1791662827192",
+      "title": "ملف انجاز الصف الثاني",
+      "description": "",
+      "image": "",
+      "target": "#",
+      "visible": true,
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u"
+        }
+      ]
     }
   ],
   "criteria": [
