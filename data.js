@@ -1,7 +1,7 @@
 window.PORTFOLIO_DATA = {
   "settings": {
-    "siteTitle": "السلام عليكم",
-    "teacherName": "المعلمة / سلوى الزهراني",
+    "siteTitle": "ملف إنجاز",
+    "teacherName": "المعلمة / سلوى سالم الزهراني",
     "specialty": "تخصص الفيزياء",
     "tagline": "أثرٌ يبقى… وتعلُّمٌ يستمر",
     "font": "Noto Kufi Arabic",
