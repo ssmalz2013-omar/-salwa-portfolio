@@ -68,7 +68,7 @@ window.PORTFOLIO_DATA = {
       "id": "card-1791663876587",
       "title": "ملف إنجاز الصف الثاني ثانوي",
       "description": "",
-      "image": "",
+      "image": "assets/1705FF91-A6FA-48EC-B878-42542BB56316.png",
       "target": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u",
       "visible": true,
       "attachments": [
