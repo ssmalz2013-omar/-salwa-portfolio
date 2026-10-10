@@ -52,7 +52,7 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "card-1791663244239",
-      "title": "ملف انجاز الصف الثالث",
+      "title": "ملف انجاز الصف الثالث ثانوي",
       "description": "",
       "image": "",
       "target": "https://padlet.com/ssmalz2013/3-nu4quddaji9rhbiv",
@@ -61,6 +61,20 @@ window.PORTFOLIO_DATA = {
         {
           "label": "",
           "url": "https://padlet.com/ssmalz2013/3-nu4quddaji9rhbiv"
+        }
+      ]
+    },
+    {
+      "id": "card-1791663395385",
+      "title": "ملف انجاز الصف الثاني ثانوي",
+      "description": "",
+      "image": "",
+      "target": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u",
+      "visible": true,
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u"
         }
       ]
     }
