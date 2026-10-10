@@ -54,7 +54,7 @@ window.PORTFOLIO_DATA = {
       "id": "card-1791663849940",
       "title": "ملف إنجاز الصف الثالث ثانوي",
       "description": "",
-      "image": "",
+      "image": "assets/35315E8D-2266-4F1A-90EF-0631C040A69C.png",
       "target": "https://padlet.com/ssmalz2013/3-nu4quddaji9rhbiv",
       "visible": true,
       "attachments": [
@@ -68,7 +68,7 @@ window.PORTFOLIO_DATA = {
       "id": "card-1791663876587",
       "title": "ملف إنجاز الصف الثاني ثانوي",
       "description": "",
-      "image": "assets/1705FF91-A6FA-48EC-B878-42542BB56316.png",
+      "image": "",
       "target": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u",
       "visible": true,
       "attachments": [
