@@ -69,9 +69,14 @@ window.PORTFOLIO_DATA = {
       "title": "ملف إنجاز الصف الثاني ثانوي",
       "description": "",
       "image": "",
-      "target": "",
+      "target": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://padlet.com/ssmalz2030/2-s023q9i3liodcwiy3n8u"
+        }
+      ]
     }
   ],
   "criteria": [
