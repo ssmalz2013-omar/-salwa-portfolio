@@ -132,8 +132,12 @@ window.PORTFOLIO_DATA = {
   ],
   "years": [
     {
-      "label": "السنة الحالية",
+      "label": "1448هـ",
       "description": "يوضع هنا محتوى العام الحالي وروابط الشواهد الخاصة به."
+    },
+    {
+      "label": "1447هـ",
+      "description": ""
     }
   ]
 };
