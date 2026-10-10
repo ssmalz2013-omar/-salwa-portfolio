@@ -1,7 +1,7 @@
 window.PORTFOLIO_DATA = {
   "settings": {
     "siteTitle": "ملف إنجاز",
-    "teacherName": "المعلمة / سلوى سالم الزهراني",
+    "teacherName": "المعلمة / سلوى الزهراني",
     "specialty": "تخصص الفيزياء",
     "tagline": "أثرٌ يبقى… وتعلُّمٌ يستمر",
     "font": "Noto Kufi Arabic",
@@ -21,7 +21,16 @@ window.PORTFOLIO_DATA = {
       "image": "assets/about.jpg",
       "target": "about.html",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1FsTaMbk0lZmF_1s91rrTTTvUYWtLtg6p"
+        },
+        {
+          "label": "",
+          "url": ""
+        }
+      ]
     },
     {
       "id": "vision",
@@ -132,12 +141,8 @@ window.PORTFOLIO_DATA = {
   ],
   "years": [
     {
-      "label": "1448هـ",
+      "label": "السنة الحالية",
       "description": "يوضع هنا محتوى العام الحالي وروابط الشواهد الخاصة به."
-    },
-    {
-      "label": "1447هـ",
-      "description": ""
     }
   ]
 };
