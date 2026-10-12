@@ -107,70 +107,120 @@ window.PORTFOLIO_DATA = {
       "title": "التفاعل مع المجتمع المحلي",
       "description": "مشاركة فاعلة في المبادرات والأنشطة ذات الصلة بالمجتمع.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1MrfP-jrQbKMN3Y2FWTIbYL7dkwjJy8du?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "parents",
       "title": "التعامل مع أولياء الأمور",
       "description": "تواصل مهني داعم لبناء شراكة فعالة مع أولياء الأمور.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1aLJY0jEZO7ewl7xaHHMtPye_-7LjR-XX?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "strategies",
       "title": "التنويع في استراتيجيات التدريس",
       "description": "تنويع طرائق واستراتيجيات التعليم وفق احتياجات الطالبات.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1rjWvnYI50lq8fcWEmEai-n6FQ7amvZcC?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "results",
       "title": "تحسين نتائج المتعلمين",
       "description": "توظيف خطط علاجية وإثرائية لتحسين التحصيل.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1EzRnzfjS2pRS8PEV9uCLkmLR9b2FBLXn?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "plan",
       "title": "إعداد وتنفيذ خطة التعلم",
       "description": "تخطيط منظم للتعلم يربط الأهداف بالأنشطة والتقويم.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1863Yx8AmdN2O1Vh04fL_ala6T0vkRUyY?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "technology",
       "title": "توظيف تقنيات ووسائل التعلم المناسبة",
       "description": "استخدام التقنية والوسائل التعليمية لدعم التعلم.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1eIEgIxhQQ5cYw_iPK11uw5JA9TppPJ40?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "environment",
       "title": "تهيئة البيئة التعليمية",
       "description": "تهيئة بيئة صفية منظمة ومحفزة وآمنة.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1O5SwmII9oGPBEDswCtpPPDVfeCw0jqf2?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "management",
       "title": "الإدارة الصفية",
       "description": "إدارة فعالة للحصة والوقت والتفاعل الصفي.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1CSUi93oPzCtH1RlxKeFEA8YG-fZzVXD_?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "analysis",
       "title": "تحليل نتائج المتعلمين وتشخيص مستوياتهم",
       "description": "تحليل النتائج لتحديد نقاط القوة والاحتياج.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1C5CjQKMFk25Mq4oSJRymtAoVJt7yvK1Z?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "assessment",
       "title": "تنوع أساليب التقويم",
       "description": "استخدام أدوات تقويم متنوعة قبل التعلم وأثناءه وبعده.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1Te7XufakTRpFqH9L4v4a-Ym_zRroRU2Y?usp=drive_link"
+        }
+      ]
     }
   ],
   "years": [
