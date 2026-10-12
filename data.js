@@ -35,7 +35,12 @@ window.PORTFOLIO_DATA = {
       "image": "assets/planning.jpg",
       "target": "vision.html",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1tJlsVcgzedD_hAVfAE4ENpiO3nDSLrMN?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "policy",
