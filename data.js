@@ -161,73 +161,132 @@ window.PORTFOLIO_DATA = {
   "years": [
     {
       "id": "previous-year",
-      "label": "العام الدراسي السابق",
+      "label": "العام الدراسي السابق 1447هـ",
       "description": "شواهد العام السابق مرتبة حسب بنود الأداء الوظيفي.",
       "sections": [
         {
           "id": "duties",
           "title": "أداء الواجبات الوظيفية",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1aL9pD6L7CTTrsxyP_1NmVc6rWgTdoyUY?usp=drive_link "
+            },
+            {
+              "label": "",
+              "url": ""
+            }
+          ]
         },
         {
           "id": "community",
           "title": "التفاعل مع المجتمع المحلي",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1TW6Si2hndTZUmaR0ieOnkhTEpiwEhDB1?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "parents",
           "title": "التعامل مع أولياء الأمور",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1IJZNTKG2PUsQsvZvfp8UAR3lQHsu0jKn?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "strategies",
           "title": "التنويع في استراتيجيات التدريس",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1HPFFN4dtbByRaOinpEXztKXjjZ2dnIaM?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "results",
           "title": "تحسين نتائج المتعلمين",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1NebfozjLpGdB4LoX0Bkiydf63trxlyR7?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "plan",
           "title": "إعداد وتنفيذ خطة التعلم",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1UuoX401Yho3eyyDy3_yb8_lQuH7vcTld?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "technology",
           "title": "توظيف تقنيات ووسائل التعلم المناسبة",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1-wyYRFSDgPX8JftLxR-LU7vTYava0hEQ?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "environment",
           "title": "تهيئة البيئة التعليمية",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1-vTT2WIzeWYBLOZRpTg0xmiLhQBoSkCZ?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "management",
           "title": "الإدارة الصفية",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1bgOZY0h6ECzp-xS8Pb1D6EryoXnX5dRZ?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "analysis",
           "title": "تحليل نتائج المتعلمين وتشخيص مستوياتهم",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1SKd37ZaD-1wULXbucg-gen_gbbteKoya?usp=drive_link"
+            }
+          ]
         },
         {
           "id": "assessment",
           "title": "تنوع أساليب التقويم",
-          "attachments": []
+          "attachments": [
+            {
+              "label": "",
+              "url": "https://drive.google.com/drive/folders/1AX8Y4LW9b0CPgeF3t_sdnmak0T-swBP2?usp=drive_link"
+            }
+          ]
         }
       ],
       "studentPortfolios": [
         {
-          "title": "ملف إنجاز طالبة 1",
-          "url": ""
+          "title": "ملف إنجاز  1",
+          "url": "https://padlet.com/ssmalz2013/3-1-1-2-3-l210l5yynm6kyrc6"
         },
         {
-          "title": "ملف إنجاز طالبة 2",
-          "url": ""
+          "title": "ملف إنجاز  2",
+          "url": "https://padlet.com/ssmalz2013/3-2-h15fm3o4vzxstea3"
         }
       ]
     },
