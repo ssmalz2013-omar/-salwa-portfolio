@@ -160,8 +160,81 @@ window.PORTFOLIO_DATA = {
   ],
   "years": [
     {
-      "label": "السنة الحالية",
-      "description": "يوضع هنا محتوى العام الحالي وروابط الشواهد الخاصة به."
+      "id": "previous-year",
+      "label": "العام الدراسي السابق",
+      "description": "شواهد العام السابق مرتبة حسب بنود الأداء الوظيفي.",
+      "sections": [
+        {
+          "id": "duties",
+          "title": "أداء الواجبات الوظيفية",
+          "attachments": []
+        },
+        {
+          "id": "community",
+          "title": "التفاعل مع المجتمع المحلي",
+          "attachments": []
+        },
+        {
+          "id": "parents",
+          "title": "التعامل مع أولياء الأمور",
+          "attachments": []
+        },
+        {
+          "id": "strategies",
+          "title": "التنويع في استراتيجيات التدريس",
+          "attachments": []
+        },
+        {
+          "id": "results",
+          "title": "تحسين نتائج المتعلمين",
+          "attachments": []
+        },
+        {
+          "id": "plan",
+          "title": "إعداد وتنفيذ خطة التعلم",
+          "attachments": []
+        },
+        {
+          "id": "technology",
+          "title": "توظيف تقنيات ووسائل التعلم المناسبة",
+          "attachments": []
+        },
+        {
+          "id": "environment",
+          "title": "تهيئة البيئة التعليمية",
+          "attachments": []
+        },
+        {
+          "id": "management",
+          "title": "الإدارة الصفية",
+          "attachments": []
+        },
+        {
+          "id": "analysis",
+          "title": "تحليل نتائج المتعلمين وتشخيص مستوياتهم",
+          "attachments": []
+        },
+        {
+          "id": "assessment",
+          "title": "تنوع أساليب التقويم",
+          "attachments": []
+        }
+      ],
+      "studentPortfolios": [
+        {
+          "title": "ملف إنجاز طالبة 1",
+          "url": ""
+        },
+        {
+          "title": "ملف إنجاز طالبة 2",
+          "url": ""
+        }
+      ]
+    },
+    {
+      "id": "current-year",
+      "label": "العام الدراسي الحالي",
+      "description": "توثيق الأعمال والشواهد المهنية للعام الدراسي الحالي."
     }
   ]
 };

@@ -10,9 +10,35 @@
 </header>
 <main class="inner-page">
 <section class="page-hero"><span>ملف متجدد</span><h1>أرشيف السنوات</h1></section>
-<section class="page-content"><div class="year-grid"><article><small>عام دراسي</small><h3>السنة الحالية</h3><p>يوضع هنا محتوى العام الحالي وروابط الشواهد.</p></article><article class="add-year"><small>＋</small><h3>إضافة عام جديد</h3><p>يمكن إضافة السنوات الجديدة لاحقًا من لوحة الإدارة.</p></article></div></section>
+<section class="page-content"><div class="year-grid" id="yearGrid"></div></section>
 <div class="page-back"><a href="index.html">← العودة إلى الرئيسية</a></div>
 </main>
 <footer><span>❧</span><p>التعليم ليس فقط نقل معرفة… بل هو صناعة أثر يبقى مدى الحياة</p><span>❧</span></footer>
-<script>const m=document.getElementById('menuBtn'),n=document.getElementById('nav');if(m&&n)m.onclick=()=>n.classList.toggle('open');</script>
+<script src="data.js?v=20261012-archive"></script>
+<script>
+(function(){
+ try{
+  const q=new URLSearchParams(location.search);
+  if(q.get('preview')==='1'){
+   const raw=sessionStorage.getItem('PORTFOLIO_PREVIEW_DATA');
+   if(raw) window.PORTFOLIO_DATA=JSON.parse(raw);
+   document.documentElement.classList.add('preview-mode');
+  }
+ }catch(e){}
+})();
+const years=Array.isArray(window.PORTFOLIO_DATA?.years)?window.PORTFOLIO_DATA.years:[];
+const grid=document.getElementById('yearGrid');
+years.forEach((y,i)=>{
+ const hasSections=Array.isArray(y.sections)&&y.sections.length;
+ const card=document.createElement(hasSections?'a':'article');
+ card.className='year-card'+(hasSections?' year-card-link':'');
+ if(hasSections) card.href=`year.html?id=${encodeURIComponent(y.id||i)}`;
+ card.innerHTML=`<small>عام دراسي</small><h3></h3><p></p>${hasSections?'<span class="year-open">فتح الشواهد ←</span>':''}`;
+ card.querySelector('h3').textContent=y.label||('عام '+(i+1));
+ card.querySelector('p').textContent=y.description||'';
+ grid.appendChild(card);
+});
+const add=document.createElement('article');add.className='add-year';add.innerHTML='<small>＋</small><h3>إضافة عام جديد</h3><p>يمكن إضافة السنوات الجديدة لاحقًا من لوحة الإدارة.</p>';grid.appendChild(add);
+const m=document.getElementById('menuBtn'),n=document.getElementById('nav');if(m&&n)m.onclick=()=>n.classList.toggle('open');
+</script>
 </body></html>

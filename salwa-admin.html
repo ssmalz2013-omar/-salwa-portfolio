@@ -27,6 +27,12 @@ textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
 .item h3{margin:0;font-size:17px}
 .mini{font-size:11px;color:var(--muted)}
 .attachments{margin-top:10px;padding-top:10px;border-top:1px dashed var(--line)}
+.year-sections-admin{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.year-section-admin{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:10px;background:#fffaf8}
+.year-section-admin h4{margin:0 0 9px;font-size:14px;color:var(--mauve)}
+.year-section-admin .witness-label{font-size:12px;font-weight:700;color:var(--mauve);margin:8px 0 5px}
+.student-portfolios-admin{margin-top:14px;padding-top:12px;border-top:1px dashed var(--line)}
+.student-card-admin{border:1px solid var(--line);border-radius:12px;padding:12px;margin-top:9px;background:#fffaf8}
 .att-row{display:grid;grid-template-columns:1fr 2fr auto;gap:7px;margin-top:7px}
 .export{position:sticky;bottom:24px;z-index:50;background:rgba(255,249,247,.97);backdrop-filter:blur(10px);padding:12px;border:1px solid var(--line);border-radius:16px;display:flex;gap:8px;flex-wrap:wrap;box-shadow:0 8px 28px rgba(77,57,69,.12)}
 .note{font-size:12px;color:var(--muted);background:#fff4ef;border:1px dashed var(--rose);border-radius:12px;padding:12px}
@@ -108,7 +114,7 @@ textarea{min-height:75px;resize:vertical}.full{grid-column:1/-1}
 </div>
 </div>
 
-<script src="data.js?v=20261002-2"></script>
+<script src="data.js?v=20261012-archive"></script>
 <script>
 let data=JSON.parse(JSON.stringify(window.PORTFOLIO_DATA||{}));
 const $=id=>document.getElementById(id);
@@ -186,21 +192,67 @@ function renderCriteria(){
   box.appendChild(el);
  });
 }
+function defaultYearSections(){
+ return (data.criteria||[]).map(c=>({id:c.id||("item-"+Date.now()),title:c.title||"بند",attachments:[]}));
+}
 function renderYears(){
  const box=$("yearsList");box.innerHTML="";
  (data.years||[]).forEach((y,i)=>{
-  const el=document.createElement("div");el.className="item";
-  el.innerHTML=`<div class="item-head"><h3>سنة ${i+1}</h3><button class="btn danger">حذف</button></div>
+  const el=document.createElement("div");el.className="item";el.dataset.itemId=y.id||"";
+  const hasSections=Array.isArray(y.sections)&&y.sections.length;
+  el.innerHTML=`<div class="item-head"><h3>${y.label||("سنة "+(i+1))}</h3><button class="btn danger delete-year">حذف</button></div>
    <div class="grid"><div><label>اسم السنة</label><input data-k="label" value="${esc(y.label)}"></div>
-   <div class="full"><label>الوصف</label><textarea data-k="description">${y.description||""}</textarea></div></div>`;
-  el.querySelectorAll("[data-k]").forEach(inp=>inp.oninput=()=>y[inp.dataset.k]=inp.value);
-  el.querySelector(".danger").onclick=()=>{data.years.splice(i,1);renderYears()};
+   <div class="full"><label>الوصف</label><textarea data-k="description">${y.description||""}</textarea></div></div>
+   <div class="year-sections-admin"></div>
+   <div class="student-portfolios-admin"></div>`;
+  el.querySelectorAll("[data-k]").forEach(inp=>inp.oninput=()=>{y[inp.dataset.k]=inp.value;el.querySelector(".item-head h3").textContent=y.label||("سنة "+(i+1));});
+  const sectionsBox=el.querySelector(".year-sections-admin");
+  function drawSections(){
+   sectionsBox.innerHTML="";
+   if(!Array.isArray(y.sections)||!y.sections.length){
+    const b=document.createElement("button");b.className="btn soft";b.textContent="＋ إضافة عناوين الشواهد لهذه السنة";
+    b.onclick=()=>{y.sections=defaultYearSections();drawSections()};sectionsBox.appendChild(b);return;
+   }
+   const heading=document.createElement("div");heading.innerHTML='<b>عناوين الشواهد</b><div class="mini">تحت كل عنوان شاهد واحد، ويمكنك إضافة أي عدد من الروابط.</div>';sectionsBox.appendChild(heading);
+   y.sections.forEach((sec,si)=>{
+    sec.attachments=Array.isArray(sec.attachments)?sec.attachments:[];
+    const row=document.createElement("div");row.className="year-section-admin";
+    row.innerHTML=`<h4></h4><div class="witness-label">الشاهد</div><div class="att-list"></div><button class="btn soft add-year-link">＋ إضافة رابط</button>`;
+    row.querySelector("h4").textContent=sec.title||("البند "+(si+1));
+    const list=row.querySelector(".att-list");
+    function drawLinks(){
+     list.innerHTML="";
+     sec.attachments.forEach((a,j)=>{
+      const r=document.createElement("div");r.className="att-row";
+      r.innerHTML=`<input class="att-label" placeholder="اسم الرابط" value="${esc(a.label)}"><input class="att-url" placeholder="رابط الشاهد" value="${esc(a.url)}"><button class="btn danger">حذف</button>`;
+      const label=r.querySelector(".att-label"),url=r.querySelector(".att-url");label.oninput=()=>a.label=label.value;url.oninput=()=>a.url=url.value;r.querySelector("button").onclick=()=>{sec.attachments.splice(j,1);drawLinks()};list.appendChild(r);
+     });
+    }
+    drawLinks();row.querySelector(".add-year-link").onclick=()=>{sec.attachments.push({label:"",url:""});drawLinks();setTimeout(()=>list.querySelector('.att-row:last-child input')?.focus(),80)};
+    sectionsBox.appendChild(row);
+   });
+  }
+  drawSections();
+  const studentBox=el.querySelector(".student-portfolios-admin");
+  function drawStudentPortfolios(){
+   studentBox.innerHTML="";
+   if(!Array.isArray(y.studentPortfolios)) return;
+   const head=document.createElement("div");head.innerHTML='<b>ملفات إنجاز الطالبات</b><div class="mini">بطاقتان جاهزتان، ويمكنك إضافة المزيد أو حذف أي بطاقة.</div>';studentBox.appendChild(head);
+   y.studentPortfolios.forEach((sp,pi)=>{
+    const row=document.createElement("div");row.className="student-card-admin";
+    row.innerHTML=`<div class="grid"><div><label>عنوان البطاقة</label><input class="student-title" value="${esc(sp.title)}"></div><div><label>رابط ملف الإنجاز</label><input class="student-url" placeholder="رابط Google Drive أو الموقع" value="${esc(sp.url)}"></div></div><div class="row"><button class="btn danger delete-student-card">حذف البطاقة</button></div>`;
+    const ti=row.querySelector('.student-title'),ur=row.querySelector('.student-url');ti.oninput=()=>sp.title=ti.value;ur.oninput=()=>sp.url=ur.value;row.querySelector('.delete-student-card').onclick=()=>{y.studentPortfolios.splice(pi,1);drawStudentPortfolios()};studentBox.appendChild(row);
+   });
+   const add=document.createElement("button");add.className="btn soft";add.textContent="＋ إضافة بطاقة ملف إنجاز";add.onclick=()=>{y.studentPortfolios.push({title:'ملف إنجاز طالبة '+(y.studentPortfolios.length+1),url:''});drawStudentPortfolios()};studentBox.appendChild(add);
+  }
+  drawStudentPortfolios();
+  el.querySelector(".delete-year").onclick=()=>{data.years.splice(i,1);renderYears()};
   box.appendChild(el);
  });
 }
 $("addCard").onclick=()=>{data.homeCards=data.homeCards||[];data.homeCards.push({id:"card-"+Date.now(),title:"قسم جديد",description:"",image:"",target:"#",visible:true,attachments:[]});renderCards()};
 $("addCriterion").onclick=()=>{data.criteria=data.criteria||[];data.criteria.push({id:"item-"+Date.now(),title:"بند جديد",description:"",visible:true,attachments:[]});renderCriteria()};
-$("addYear").onclick=()=>{data.years=data.years||[];data.years.push({label:"عام جديد",description:""});renderYears()};
+$("addYear").onclick=()=>{data.years=data.years||[];data.years.push({id:"year-"+Date.now(),label:"عام جديد",description:"",sections:defaultYearSections()});renderYears()};
 
 function utf8ToBase64(str){
   const bytes=new TextEncoder().encode(str); let binary=""; const chunk=0x8000;
@@ -265,7 +317,8 @@ function syncVisibleFields(){
 $("preview").onclick=()=>{
   syncVisibleFields();
   try{sessionStorage.setItem("PORTFOLIO_PREVIEW_DATA",JSON.stringify(data));}catch(e){}
-  window.open("index.html?preview=1","_blank");
+  const active=document.querySelector("[data-tab].active")?.dataset.tab;
+  window.open(active==="years"?"years.html?preview=1":"index.html?preview=1","_blank");
 };
 $("cancelChanges").onclick=()=>{
   if(confirm("هل تريدين إلغاء التعديلات غير المحفوظة والعودة لآخر نسخة؟")){

@@ -1,0 +1,65 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>شواهد العام | ملف الإنجاز الإلكتروني</title><link rel="stylesheet" href="styles.css"></head>
+<body>
+<header class="topbar">
+<a class="brand" href="index.html"><span>✦</span> ملف الإنجاز الإلكتروني</a>
+<button class="menu" id="menuBtn">☰</button>
+<nav id="nav"><a href="index.html">الرئيسية</a><a href="about.html">نبذة عني</a><a href="vision.html">الرؤية والرسالة</a><a href="policy.html">سياسة التعليم</a><a href="performance.html">الأداء الوظيفي</a><a href="years.html">أرشيف السنوات</a></nav>
+</header>
+<main class="inner-page">
+<section class="page-hero"><span>أرشيف الشواهد</span><h1 id="yearTitle">العام الدراسي السابق</h1></section>
+<section class="archive-sections" id="archiveSections"></section>
+<section class="student-portfolios-wrap" id="studentPortfoliosWrap" hidden><div class="student-portfolios-head"><span>أعمال الطالبات</span><h2>ملفات إنجاز الطالبات</h2></div><div class="student-portfolios-grid" id="studentPortfoliosGrid"></div></section>
+<div class="page-back"><a href="years.html">← العودة إلى أرشيف السنوات</a></div>
+</main>
+<footer><span>❧</span><p>التعليم ليس فقط نقل معرفة… بل هو صناعة أثر يبقى مدى الحياة</p><span>❧</span></footer>
+<script src="data.js?v=20261012-archive"></script>
+<script>
+(function(){
+ try{
+  const q=new URLSearchParams(location.search);
+  if(q.get('preview')==='1'){
+   const raw=sessionStorage.getItem('PORTFOLIO_PREVIEW_DATA');
+   if(raw) window.PORTFOLIO_DATA=JSON.parse(raw);
+   document.documentElement.classList.add('preview-mode');
+  }
+ }catch(e){}
+})();
+const params=new URLSearchParams(location.search);const id=params.get('id');
+const years=Array.isArray(window.PORTFOLIO_DATA?.years)?window.PORTFOLIO_DATA.years:[];
+const y=years.find(x=>String(x.id)===String(id))||years.find(x=>Array.isArray(x.sections)&&x.sections.length)||years[0];
+const title=document.getElementById('yearTitle'),box=document.getElementById('archiveSections');
+if(y){title.textContent=y.label||'العام الدراسي السابق';document.title=(y.label||'شواهد العام')+' | ملف الإنجاز الإلكتروني';}
+const sections=Array.isArray(y?.sections)?y.sections:[];
+sections.forEach((s,i)=>{
+ const card=document.createElement('article');card.className='archive-section-card';
+ const links=Array.isArray(s.attachments)?s.attachments:[];
+ card.innerHTML=`<div class="archive-title-row"><span class="archive-index">${String(i+1).padStart(2,'0')}</span><h3></h3></div><div class="archive-witness"><span class="archive-witness-label">الشاهد</span><div class="archive-links"></div></div>`;
+ card.querySelector('h3').textContent=s.title||('البند '+(i+1));
+ const linksBox=card.querySelector('.archive-links');
+ if(!links.length){linksBox.innerHTML='<span class="archive-empty">لم تتم إضافة روابط بعد.</span>';}else{
+  links.forEach((a,j)=>{const l=document.createElement('a');l.href=a.url||'#';l.target='_blank';l.rel='noopener';l.textContent=a.label||('رابط '+(j+1));linksBox.appendChild(l);});
+ }
+ box.appendChild(card);
+});
+if(!sections.length) box.innerHTML='<div class="empty-criterion-evidence">لا توجد شواهد مضافة لهذا العام حتى الآن.</div>';
+const studentWrap=document.getElementById('studentPortfoliosWrap'),studentGrid=document.getElementById('studentPortfoliosGrid');
+const studentPortfolios=Array.isArray(y?.studentPortfolios)?y.studentPortfolios:[];
+if(studentPortfolios.length){
+ studentWrap.hidden=false;
+ studentPortfolios.forEach((item,i)=>{
+  const card=document.createElement(item.url?'a':'article');
+  card.className='student-portfolio-card';
+  if(item.url){card.href=item.url;card.target='_blank';card.rel='noopener';}
+  card.innerHTML=`<span class="student-card-icon">✦</span><h3></h3><span class="student-card-link"></span>`;
+  card.querySelector('h3').textContent=item.title||('ملف إنجاز طالبة '+(i+1));
+  card.querySelector('.student-card-link').textContent=item.url?'فتح الملف ←':'يُضاف الرابط من لوحة الإدارة';
+  studentGrid.appendChild(card);
+ });
+}
+
+const m=document.getElementById('menuBtn'),n=document.getElementById('nav');if(m&&n)m.onclick=()=>n.classList.toggle('open');
+</script>
+</body></html>
