@@ -21,7 +21,12 @@ window.PORTFOLIO_DATA = {
       "image": "assets/about.jpg",
       "target": "about.html",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1FsTaMbk0lZmF_1s91rrTTTvUYWtLtg6p?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "vision",
