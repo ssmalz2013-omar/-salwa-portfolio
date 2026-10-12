@@ -60,7 +60,7 @@ window.PORTFOLIO_DATA = {
       "id": "professional",
       "title": "بنود الأداء الوظيفي",
       "description": "أحد عشر بندًا مرتبة مع مساحة مستقلة للشواهد.",
-      "image": "assets/initiatives.jpg",
+      "image": "assets/2CDEAA47-A273-48B8-A67F-5762D9A6A032.png",
       "target": "performance.html",
       "visible": true,
       "attachments": []
