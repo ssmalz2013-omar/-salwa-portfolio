@@ -95,7 +95,12 @@ window.PORTFOLIO_DATA = {
       "title": "أداء الواجبات الوظيفية",
       "description": "الالتزام بالمسؤوليات والمهام المهنية بكفاءة وانتظام.",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1bQCQcl-6xcY0LTiudHz8CbxsAp-iV3Kk?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "community",
