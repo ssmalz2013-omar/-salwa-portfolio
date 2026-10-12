@@ -46,7 +46,7 @@ window.PORTFOLIO_DATA = {
       "id": "policy",
       "title": "أهداف تدريس مادة الفيزياء",
       "description": "أهداف تعليمية لتنمية الفهم الفيزيائي والتفكير العلمي والاستقصاء وحل المشكلات وربط الفيزياء بالحياة",
-      "image": "assets/strategy.jpg",
+      "image": "assets/lessons.jpg",
       "target": "policy.html",
       "visible": true,
       "attachments": [
