@@ -44,12 +44,17 @@ window.PORTFOLIO_DATA = {
     },
     {
       "id": "policy",
-      "title": "سياسة التعليم",
-      "description": "مرتكزات تربوية أستند إليها في عملي اليومي.",
+      "title": "أهداف تدريس مادة الفيزياء",
+      "description": "أهداف تعليمية لتنمية الفهم الفيزيائي والتفكير العلمي والاستقصاء وحل المشكلات وربط الفيزياء بالحياة",
       "image": "assets/strategy.jpg",
       "target": "policy.html",
       "visible": true,
-      "attachments": []
+      "attachments": [
+        {
+          "label": "",
+          "url": "https://drive.google.com/drive/folders/1XjXFkJm0v68lT0c52-5TOSJnkhfiIR_c?usp=drive_link"
+        }
+      ]
     },
     {
       "id": "professional",
