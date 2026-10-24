@@ -98,7 +98,7 @@ window.PORTFOLIO_DATA = {
       "title": "المشروعات التعليمية الرقمية",
       "description": "مواقع ومشروعات رقمية طورتها لدعم التعلم وتعزيز تفاعل الطالبات",
       "image": "assets/E7F7C6DA-2AD1-4430-A6AC-0BE4E906D627.png",
-      "target": "#",
+      "target": "projects.html",
       "visible": true,
       "attachments": [
         {
